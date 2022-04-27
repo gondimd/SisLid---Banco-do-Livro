@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-10-23T14:00:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioSecundario" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="287" leftMargin="1" rightMargin="20" topMargin="1" bottomMargin="1" uuid="0615873b-85d0-44c8-978d-5a3f0bf624c8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Biblivre4"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<parameter name="codigo" class="java.lang.Integer" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select single.exemplar.registro as codigo, single.area.nome as area
+from single.emprestimo 
+inner join single.exemplar
+on single.emprestimo.exemplar = single.exemplar.registro
+inner join single.livro 
+on single.livro.registro = single.exemplar.livro
+inner join single.area
+on single.area.codigo = single.livro.area
+where single.emprestimo.users = $P{codigo}
+and single.emprestimo.status = true]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="area" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="09943afd-7321-47cd-90bd-0803a9b52a1f"/>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="a2879c81-1130-43e0-b37e-821b124af559"/>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

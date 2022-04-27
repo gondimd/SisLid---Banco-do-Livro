@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2015-11-16T12:49:07 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioSecundario" pageWidth="595" pageHeight="842" columnWidth="574" leftMargin="1" rightMargin="20" topMargin="1" bottomMargin="1" uuid="0615873b-85d0-44c8-978d-5a3f0bf624c8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Biblivre4"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="codigo" class="java.lang.Integer" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select single.exemplar.registro as codigo, single.area.nome as area, single.livro.serie as serie
+from single.emprestimo 
+inner join single.exemplar
+on single.emprestimo.exemplar = single.exemplar.registro
+inner join single.livro 
+on single.livro.registro = single.exemplar.livro
+inner join single.area
+on single.area.codigo = single.livro.area
+where single.emprestimo.users = $P{codigo}
+and single.emprestimo.status = true
+and single.emprestimo.data_hora >=  current_date ]]>
+	</queryString>
+	<field name="codigo" class="java.lang.Integer"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="serie" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="29">
+			<staticText>
+				<reportElement x="20" y="8" width="58" height="20" uuid="af0a4c64-1d39-4876-af4f-4b3a91931e50"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="8" width="80" height="20" uuid="907d58e8-17af-47a0-b15c-24348fdb347f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Área]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="8" width="40" height="20" uuid="48c1e104-3331-4748-acf0-ce92d02ca042"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Série]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="2" width="58" height="20" uuid="09943afd-7321-47cd-90bd-0803a9b52a1f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="78" y="2" width="80" height="20" uuid="a2879c81-1130-43e0-b37e-821b124af559"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{area}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="2" width="40" height="20" uuid="5b97a4cf-3581-4602-9e71-8098aabe342a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

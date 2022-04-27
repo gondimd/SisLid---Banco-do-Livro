@@ -1,0 +1,11 @@
+#É necessário realizar a instalação do postgrsql
+# Apos a instalação importar o backup da pasta "Backup - SisLiD" 
+# Para executar o sistema acessar o atalho "SisLiD - executável"
+login: diego
+senha: 123
+
+
+
+Postgresql senha de acesso
+login: postgres
+Senha: abracadabra
